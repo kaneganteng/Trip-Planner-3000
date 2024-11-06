@@ -5,6 +5,7 @@ import axios from 'axios';
 import type { Request, Response } from 'express';
 const router = express.Router();
 
+
 const CLIENT_ID = process.env.AMADEUS_CLIENT_ID; // Store your Amadeus credentials in environment variables
 const CLIENT_SECRET = process.env.AMADEUS_CLIENT_SECRET;
 
@@ -26,6 +27,9 @@ router.post('/getToken', async (_req: Request, res: Response) => {
   }
 });
 
+// Route to fetch hotels by city code
+// Route to fetch hotels by city code
+// Route to fetch hotels by city code
 // Route to fetch hotels by city code
 
 // Totally mess-upable
@@ -86,8 +90,9 @@ router.get('/hotels/:cityCode', async (req: Request, res: Response) => {
   }
 });
 
-
-// ROUTER FOR FLIGHTS MAKE SURE TO CHANGE EVERYTHING RELATING TO HOTELS UNDER THIS COMMENT TO FLIGHT RELATED INFORMATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// ROUTER FOR FLIGHT OFFERS
+// ROUTER FOR FLIGHT OFFERS
+// ROUTER FOR FLIGHT OFFERS
 router.get('/shopping/flight-offers', async (req: Request, res: Response) => {
     const authHeader = req.headers.authorization;
   if (!authHeader) {
@@ -143,12 +148,20 @@ router.get('/shopping/flight-offers', async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'Failed to fetch flight offers' });
   }
 });
+console.log(process.env.API_KEY);
+console.log(process.env.API_BASE_URL)
 
-
 // ROUTER FOR LOCAL EVENT
 // ROUTER FOR LOCAL EVENT
 // ROUTER FOR LOCAL EVENT
 // ROUTER FOR LOCAL EVENT
+async function lookUpLocation(city: string): Promise<{ lon: number, lat: number}> {
+   const response: { data: {lat: number, lon: number}[] } = await axios.get(
+    `${process.env.API_BASE_URL}/geo/1.0/direct?q=${city}&limit=1&appid=${process.env.API_KEY}`
+  )
+  console.log(response.data[0]);
+  return response.data[0] as { lon: number, lat: number };
+};
 router.get('/shopping/activities', async (req: Request, res: Response) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
@@ -156,9 +169,13 @@ router.get('/shopping/activities', async (req: Request, res: Response) => {
     }
   
     // Extract query parameters for activity search
-    const { longitude, latitude, radius, max } = req.query;
-    if (!longitude || !latitude || !radius) {
-      return res.status(400).json({ message: 'Missing required query parameters: longitude, latitude, and radius' });
+    let { city, radius, max } = req.query;
+    if (typeof city !== "string") {
+      city = " "
+    }
+    const {lon, lat} = await lookUpLocation(city);
+    if (!lon || !lat || !radius) {
+      return res.status(400).json({ message: 'Missing required query parameters: lon, lat, and radius' });
     }
   
     try {
@@ -167,8 +184,8 @@ router.get('/shopping/activities', async (req: Request, res: Response) => {
         {
           headers: { Authorization: `Bearer ${authHeader}` },
           params: {
-            longitude,  // Dynamic parameter for longitude
-            latitude,   // Dynamic parameter for latitude
+            longitude: lon,  // Dynamic parameter for lon
+            latitude: lat,   // Dynamic parameter for lat
             radius,     // Dynamic parameter for search radius
             max: max || 10  // Optional max limit on the number of results
           }
