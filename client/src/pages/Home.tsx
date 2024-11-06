@@ -4,9 +4,9 @@ import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
 import UserList from '../components/Users';
 import auth from '../utils/auth';
+import ApiSearchButton from "../components/Button1";
 
 const Home = () => {
-
     const [users, setUsers] = useState<UserData[]>([]);
     const [error, setError] = useState(false);
     const [loginCheck, setLoginCheck] = useState(false);
@@ -30,12 +30,17 @@ const Home = () => {
     const fetchUsers = async () => {
         try {
             const data = await retrieveUsers();
-            setUsers(data)
+            setUsers(data);
         } catch (err) {
             console.error('Failed to retrieve tickets:', err);
             setError(true);
         }
     }
+
+    const handleApiResults = (data: any) => {
+        console.log('API Results:', data);
+        // You could add logic here to update the UI with API data if needed
+    };
 
     if (error) {
         return <ErrorPage />;
@@ -46,13 +51,13 @@ const Home = () => {
             {
                 !loginCheck ? (
                     <div className='login-notice'>
-                        <h1>
-                            Login to view all your friends!
-                        </h1>
+                        <h1>Login to view all your friends!</h1>
                     </div>
                 ) : (
                     <UserList users={users} />
-                )}
+                )
+            }
+            <ApiSearchButton onResults={handleApiResults} />
         </>
     );
 };
