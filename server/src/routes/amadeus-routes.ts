@@ -86,6 +86,121 @@ router.get('/hotels/:cityCode', async (req: Request, res: Response) => {
   }
 });
 
-router.get('/flights')
+
+// ROUTER FOR FLIGHTS MAKE SURE TO CHANGE EVERYTHING RELATING TO HOTELS UNDER THIS COMMENT TO FLIGHT RELATED INFORMATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+router.get('/shopping/flight-offers', async (req: Request, res: Response) => {
+    const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ message: 'Authorization header is missing' });
+  }
+
+  // Extract query parameters for flight search
+  const { originLocationCode, destinationLocationCode, departureDate, returnDate, adults } = req.query;
+  if (!originLocationCode || !destinationLocationCode || !departureDate || !adults) {
+    return res.status(400).json({ message: 'Missing required query parameters' });
+  }
+
+  try {
+    const response = await axios.get(
+      'https://test.api.amadeus.com/v2/shopping/flight-offers',
+      {
+        headers: { Authorization: `Bearer ${authHeader}` },
+        params: {
+          originLocationCode,
+          destinationLocationCode,
+          departureDate,
+          returnDate,
+          adults,
+          max: 10  // Limit results
+        }
+      }
+    );
+
+    return res.json(response.data);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log('Axios error:', error.message);
+
+      if (error.response) {
+        console.log('Status:', error.response.status);
+        const errorData = error.response.data;
+        if (errorData && errorData.errors) {
+          console.log('Error details:');
+          errorData.errors.forEach((err: any, index: number) => {
+            console.log(`Error ${index + 1}:`, err);
+          });
+        } else {
+          console.log('Data:', errorData);
+        }
+        console.log('Headers:', error.response.headers);
+      } else if (error.request) {
+        console.log('No response received:', error.request);
+      }
+    } else {
+      console.error('Non-Axios error:', error);
+    }
+
+    return res.status(500).json({ message: 'Failed to fetch flight offers' });
+  }
+});
+
+
+// ROUTER FOR LOCAL EVENT
+// ROUTER FOR LOCAL EVENT
+// ROUTER FOR LOCAL EVENT
+// ROUTER FOR LOCAL EVENT
+router.get('/shopping/activities', async (req: Request, res: Response) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(401).json({ message: 'Authorization header is missing' });
+    }
+  
+    // Extract query parameters for activity search
+    const { longitude, latitude, radius, max } = req.query;
+    if (!longitude || !latitude || !radius) {
+      return res.status(400).json({ message: 'Missing required query parameters: longitude, latitude, and radius' });
+    }
+  
+    try {
+      const response = await axios.get(
+        'https://test.api.amadeus.com/v1/shopping/activities', // Correct endpoint for activities
+        {
+          headers: { Authorization: `Bearer ${authHeader}` },
+          params: {
+            longitude,  // Dynamic parameter for longitude
+            latitude,   // Dynamic parameter for latitude
+            radius,     // Dynamic parameter for search radius
+            max: max || 10  // Optional max limit on the number of results
+          }
+        }
+      );
+  
+      return res.json(response.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log('Axios error:', error.message);
+  
+        if (error.response) {
+          console.log('Status:', error.response.status);
+          const errorData = error.response.data;
+          if (errorData && errorData.errors) {
+            console.log('Error details:');
+            errorData.errors.forEach((err: any, index: number) => {
+              console.log(`Error ${index + 1}:`, err);
+            });
+          } else {
+            console.log('Data:', errorData);
+          }
+          console.log('Headers:', error.response.headers);
+        } else if (error.request) {
+          console.log('No response received:', error.request);
+        }
+      } else {
+        console.error('Non-Axios error:', error);
+      }
+  
+      return res.status(500).json({ message: 'Failed to fetch local activities' });
+    }
+  });
 
 export { router as amadeusRouter };
