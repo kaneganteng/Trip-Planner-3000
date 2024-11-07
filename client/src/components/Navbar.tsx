@@ -2,7 +2,19 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../utils/auth';
 
+
 const Navbar = () => {
+
+  <nav>
+  <ul>
+      <li><Link to="/">Flights</Link></li>
+      <li><Link to="/Hotels">Hotels</Link></li>
+      <li><Link to="/LocalEvents">Local Events</Link></li>
+      <li>About Us</li>
+      <li>Contacts</li>
+  </ul>
+
+</nav>
   const [loginCheck, setLoginCheck] = useState(false);
 
   const checkLogin = () => {
