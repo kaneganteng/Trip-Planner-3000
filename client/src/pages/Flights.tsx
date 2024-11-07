@@ -7,6 +7,7 @@ const Flights = () => (
 <input type="date" placeholder="Departing" />
 <input type="date" placeholder="Returning" />
 <input type="number" placeholder="Adults" />
+<button onClick={() => console.log("Searching Flights...")}>Search</button>
 
 </section>
 )
