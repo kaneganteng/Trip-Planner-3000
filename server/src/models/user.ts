@@ -1,68 +1,264 @@
-import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
-import bcrypt from 'bcrypt';
+import { DataTypes, Sequelize, Model } from 'sequelize';
+//import bcrypt from 'bcrypt';
 
-interface UserAttributes {
-  id: number;
-  username: string;
-  email: string;
-  password: string;
-}
+const sequelize = new Sequelize({
+  dialect: 'mysql', // or 'postgres'
+  host: 'localhost',
+  username: 'root',
+  password: 'password',
+  database: 'trip_planner_db',
+});
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
-
-export class User
-  extends Model<UserAttributes, UserCreationAttributes>
-  implements UserAttributes
-{
-  public id!: number;
-  public username!: string;
-  public email!: string;
-  public password!: string;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-
-  // Hash the password before saving the user
-  public async setPassword(password: string) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(password, saltRounds);
+//User Model
+export class User extends Model {
+  
+  static associate(models: any) {
+    // Associate User with Flights, Hotels, and Events
+    User.hasMany(models.Flight, { foreignKey: 'userId' });
+    User.hasMany(models.Hotel, { foreignKey: 'userId' });
+    User.hasMany(models.Event, { foreignKey: 'userId' });
   }
 }
 
-export function UserFactory(sequelize: Sequelize): typeof User {
-  User.init(
-    {
+User.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true, 
+      },
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true, 
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true, 
+        len: [6, 100], 
+      },
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+  },
+  {
+    sequelize, 
+    modelName: 'User',
+  }
+);  
+
+// Flight Model
+export class Flight extends Model {
+  static associate(models: any) {
+    // Associate Flight with User
+    Flight.belongsTo(models.User, { foreignKey: 'userId' });
+  }
+}
+
+Flight.init({
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      username: {
-        type: DataTypes.STRING,
+      userId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: 'users', 
+          key: 'id', 
+        },
       },
-      email: {
+      destination: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
       },
-      password: {
-        type: DataTypes.STRING,
+      departureDate: {
+        type: DataTypes.DATE,
         allowNull: false,
+        validate: {
+          isDate: true,
+        },
+      },
+      price: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        validate: {
+          min: 0, 
+        },
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
     },
     {
-      tableName: 'users',
       sequelize,
-      hooks: {
-        beforeCreate: async (user: User) => {
-          await user.setPassword(user.password);
-        },
-        beforeUpdate: async (user: User) => {
-          await user.setPassword(user.password);
-        },
-      },
+      modelName: 'Flight',
     }
   );
 
-  return User;
+//Hotel Model
+export class Hotel extends Model {
+  static associate(models: any) {
+    // Associate Hotel with User
+    Hotel.belongsTo(models.User, { foreignKey: 'userId' });
+  }
 }
+
+Hotel.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id', 
+      },
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    checkInDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true,
+      },
+    },
+    checkOutDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true,
+      },
+    },
+    price: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      validate: {
+        min: 0,
+      },
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+  },
+  {
+    sequelize,
+    modelName: 'Hotel',
+  }
+);
+
+//LocalEvents Model
+export class Event extends Model {
+  static associate(models: any) {
+    // Associate Event with User
+    Event.belongsTo(models.User, { foreignKey: 'userId' });
+  }
+}
+
+Event.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users', 
+        key: 'id', 
+      },
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    eventDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true,
+      },
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+  },
+  {
+    sequelize,
+    modelName: 'Event',
+  }
+);
