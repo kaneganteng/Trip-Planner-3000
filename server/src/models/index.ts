@@ -1,6 +1,14 @@
-import sequelize from '../config/connection.js';
-import { UserFactory } from './user.js';
+import { User, Flight, Hotel, Event} from './user.js';  // Import the User model
 
-const User = UserFactory(sequelize);
+// Set up model associations
+User.associate({ Flight, Hotel, Event });
+Flight.associate({ User });
+Hotel.associate({ User });
+Event.associate({ User });
 
-export { User };
+// Export models for use elsewhere
+export { User, Flight, Hotel, Event };
+
+
+
+
