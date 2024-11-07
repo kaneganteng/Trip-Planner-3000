@@ -1,4 +1,4 @@
-import { DataTypes, Sequelize, Model } from 'sequelize';
+import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 //import bcrypt from 'bcrypt';
 
 const sequelize = new Sequelize({
@@ -9,8 +9,23 @@ const sequelize = new Sequelize({
   database: 'trip_planner_db',
 });
 
+interface UserAttributes {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+}
+
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+
+export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  public id!: number;
+  public username!: string;
+  public email!: string;
+  public password!: string;
+
 //User Model
-export class User extends Model {
+//export class User extends Model {
   
   static associate(models: any) {
     // Associate User with Flights, Hotels, and Events
@@ -49,16 +64,6 @@ User.init(
         notEmpty: true, 
         len: [6, 100], 
       },
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
   },
   {
@@ -109,16 +114,6 @@ Flight.init({
         validate: {
           min: 0, 
         },
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
       },
     },
     {
@@ -178,16 +173,6 @@ Hotel.init(
         min: 0,
       },
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
   },
   {
     sequelize,
@@ -245,16 +230,6 @@ Event.init(
       validate: {
         notEmpty: true,
       },
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
   },
   {
