@@ -4,9 +4,9 @@ export const seedUsers = async () => {
   // Create users
   const users = await User.bulkCreate(
     [
-      { username: 'JollyGuru', email: 'jolly@guru.com', password: 'password' },
-      { username: 'SunnyScribe', email: 'sunny@scribe.com', password: 'password' },
-      { username: 'RadiantComet', email: 'radiant@comet.com', password: 'password' },
+      { username: 'Licia', email: 'licia@guru.com', password: 'password' },
+      { username: 'Kane', email: 'kane@scribe.com', password: 'password' },
+      { username: 'Micheli', email: 'micheli@comet.com', password: 'password' },
     ],
     { individualHooks: true }
   );
