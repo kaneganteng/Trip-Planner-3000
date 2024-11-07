@@ -7,6 +7,8 @@ import App from './App.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
+import Hotels from './pages/Hotels.tsx';
+import LocalEvents from './pages/LocalEvents.tsx';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/Hotels',
+        element: <Hotels />,
+      },
+      {
+        path: '/LocalEvents',
+        element: <LocalEvents/>,
       },
     ],
   },
