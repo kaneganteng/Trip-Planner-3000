@@ -44,10 +44,10 @@ const Home = () => {
   const showHotels = () => setActiveSection('hotels');
   const showLocalEvents = () => setActiveSection('localevents');
 
-  const handleSearch = () => {
-    console.log('Search button clicked');
-    // Add logic here to handle the trip search
-  };
+  // const handleSearch = () => {
+  //   console.log('Search button clicked');
+  //   // Add logic here to handle the trip search
+  // };
 
   if (error) {
     return <ErrorPage />;
