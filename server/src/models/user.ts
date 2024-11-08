@@ -108,6 +108,13 @@ Flight.init({
           isDate: true,
         },
       },
+      returnDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          isDate: true,
+        },
+      },
       price: {
         type: DataTypes.FLOAT,
         allowNull: false,

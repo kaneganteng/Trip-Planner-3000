@@ -1,0 +1,124 @@
+{
+    "id": "1",
+    "source": "GDS",
+    "instantTicketingRequired": false,
+    "nonHomogeneous": false,
+    "oneWay": false,
+    "isUpsellOffer": false,
+    "lastTicketingDate": "2024-11-13",
+    "lastTicketingDateTime": "2024-11-13",
+    "numberOfBookableSeats": 9,
+    "itineraries": [
+        {
+            "duration": "PT17H",
+            "segments": [
+                {
+                    "departure": {
+                        "iataCode": "SYD",
+                        "terminal": "0",
+                        "at": "2024-12-11T07:15:00"
+                    },
+                    "arrival": {
+                        "iataCode": "DPS",
+                        "terminal": "0",
+                        "at": "2024-12-11T10:45:00"
+                    },
+                    "carrierCode": "OD",
+                    "number": "172",
+                    "aircraft": {
+                        "code": "738"
+                    },
+                    "operating": {
+                        "carrierCode": "OD"
+                    },
+                    "duration": "PT6H30M",
+                    "id": "1",
+                    "numberOfStops": 0,
+                    "blacklistedInEU": false
+                },
+                {
+                    "departure": {
+                        "iataCode": "DPS",
+                        "terminal": "D",
+                        "at": "2024-12-11T19:25:00"
+                    },
+                    "arrival": {
+                        "iataCode": "HLP",
+                        "at": "2024-12-11T20:15:00"
+                    },
+                    "carrierCode": "ID",
+                    "number": "7310",
+                    "aircraft": {
+                        "code": "32A"
+                    },
+                    "operating": {
+                        "carrierCode": "ID"
+                    },
+                    "duration": "PT1H50M",
+                    "id": "2",
+                    "numberOfStops": 0,
+                    "blacklistedInEU": false
+                }
+            ]
+        }
+    ],
+    "price": {
+        "currency": "EUR",
+        "total": "208.42",
+        "base": "115.00",
+        "fees": [
+            {
+                "amount": "0.00",
+                "type": "SUPPLIER"
+            },
+            {
+                "amount": "0.00",
+                "type": "TICKETING"
+            }
+        ],
+        "grandTotal": "208.42"
+    },
+    "pricingOptions": {
+        "fareType": [
+            "PUBLISHED"
+        ],
+        "includedCheckedBagsOnly": false
+    },
+    "validatingAirlineCodes": [
+        "GP"
+    ],
+    "travelerPricings": [
+        {
+            "travelerId": "1",
+            "fareOption": "STANDARD",
+            "travelerType": "ADULT",
+            "price": {
+                "currency": "EUR",
+                "total": "208.42",
+                "base": "115.00"
+            },
+            "fareDetailsBySegment": [
+                {
+                    "segmentId": "1",
+                    "cabin": "ECONOMY",
+                    "fareBasis": "XOWAU",
+                    "class": "X",
+                    "includedCheckedBags": {
+                        "weight": 0,
+                        "weightUnit": "KG"
+                    }
+                },
+                {
+                    "segmentId": "2",
+                    "cabin": "ECONOMY",
+                    "fareBasis": "RIDOW",
+                    "class": "R",
+                    "includedCheckedBags": {
+                        "weight": 0,
+                        "weightUnit": "KG"
+                    }
+                }
+            ]
+        }
+    ]
+}
