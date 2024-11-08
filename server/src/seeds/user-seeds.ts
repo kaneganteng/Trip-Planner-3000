@@ -19,12 +19,14 @@ export const seedUsers = async () => {
         userId: user.id,
         destination: 'Paris',
         departureDate: new Date('2024-12-15'),
+        returnDate: new Date('2024-12-20'),
         price: 500.00, // Example price
       });
       await Flight.create({
         userId: user.id,
         destination: 'Tokyo',
         departureDate: new Date('2024-12-20'),
+        returnDate: new Date('2024-12-30'),
         price: 700.00, // Example price
       });
 
