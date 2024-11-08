@@ -36,12 +36,21 @@ router.post('/getToken', async (_req: Request, res: Response) => {
 router.get('/hotels/:cityCode', async (req: Request, res: Response) => {
   const { cityCode } = req.params;
   console.log(cityCode);
-  // Check if the Authorization header is provided
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header is missing' });
+  
+  let authHeader: string = '';
+  try {
+    const response = await axios.post(
+      'https://test.api.amadeus.com/v1/security/oauth2/token',
+      'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET,
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+    );
+    authHeader = response.data["access_token"]; //THIS
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to retrieve token' });
   }
-
 
   try {
     const response = await axios.get(
@@ -94,18 +103,34 @@ router.get('/hotels/:cityCode', async (req: Request, res: Response) => {
 // ROUTER FOR FLIGHT OFFERS
 // ROUTER FOR FLIGHT OFFERS
 router.get('/shopping/flight-offers', async (req: Request, res: Response) => {
-    const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header is missing' });
+  console.log("A");
+  let authHeader: string = '';
+  try {
+    const response = await axios.post(
+      'https://test.api.amadeus.com/v1/security/oauth2/token',
+      'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET,
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+    );
+    console.log('B');
+    authHeader = response.data["access_token"]; //THIS
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to retrieve token' });
   }
 
   // Extract query parameters for flight search
-  const { originLocationCode, destinationLocationCode, departureDate, returnDate, adults } = req.query;
-  if (!originLocationCode || !destinationLocationCode || !departureDate || !adults) {
+  const { originLocationCode, destinationLocationCode, departureDate, returnDate, 
+  adults } = req.query; 
+  console.log(originLocationCode, destinationLocationCode, departureDate, returnDate, 
+    adults);
+  if (!originLocationCode || !destinationLocationCode || !departureDate || !returnDate || !adults) {
     return res.status(400).json({ message: 'Missing required query parameters' });
   }
 
   try {
+    console.log('C');
     const response = await axios.get(
       'https://test.api.amadeus.com/v2/shopping/flight-offers',
       {
@@ -120,9 +145,12 @@ router.get('/shopping/flight-offers', async (req: Request, res: Response) => {
         }
       }
     );
-
-    return res.json(response.data);
+    
+    console.log(response.data.data);
+    console.log('D');
+    return res.json(response.data.data);
   } catch (error) {
+    console.log('E')
     if (axios.isAxiosError(error)) {
       console.log('Axios error:', error.message);
 
@@ -163,10 +191,21 @@ async function lookUpLocation(city: string): Promise<{ lon: number, lat: number}
   return response.data[0] as { lon: number, lat: number };
 };
 router.get('/shopping/activities', async (req: Request, res: Response) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-      return res.status(401).json({ message: 'Authorization header is missing' });
-    }
+  
+  let authHeader: string = '';
+  try {
+    const response = await axios.post(
+      'https://test.api.amadeus.com/v1/security/oauth2/token',
+      'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET,
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+    );
+    authHeader = response.data["access_token"]; //THIS
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to retrieve token' });
+  }
   
     // Extract query parameters for activity search
     let { city, radius, max } = req.query;
