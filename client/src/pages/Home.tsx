@@ -7,6 +7,9 @@ import './Home.css';
 import Flights from './Flights';
 import Hotels from './Hotels';
 import LocalEvents from './LocalEvents';
+import airplaneImage from '../assets/airplane.jpg';
+import happyFamilyImage from '../assets/happy family picture.jpg';
+import logoImage from '../assets/logo.png';
 
 const Home = () => {
   const [_users, setUsers] = useState<UserData[]>([]);
@@ -70,19 +73,16 @@ const Home = () => {
           {activeSection === 'flights' && (
             <div>
               <Flights />
-              {/* <button onClick={handleSearch} className="search-button">Search</button> */}
             </div>
           )}
           {activeSection === 'hotels' && (
             <div>
               <Hotels />
-              {/* <button onClick={handleSearch} className="search-button">Search</button> */}
             </div>
           )}
           {activeSection === 'localevents' && (
             <div>
               <LocalEvents />
-              {/* <button onClick={handleSearch} className="search-button">Search</button> */}
             </div>
           )}
         </div>
@@ -91,19 +91,52 @@ const Home = () => {
           <p>Because you don't want to waste time on planning rather than your trip.</p>
           <div className="info-boxes">
             <div className="info-box">Info</div>
-            <div className="info-box">Weather</div>
+            <div className="info-box">info</div>
             <div className="info-box">Info</div>
           </div>
         </section>
+        <section className="middle-section">
+          <div className="middle-content">
+            <div className="text-block">
+              <h3>Its time to take a flight</h3>
+              <p>Your text content goes here...</p>
+            </div>
+            <div className="image-block">
+            <img src={airplaneImage} alt="Airplane" />
+          </div>
+          </div>
+          <div className="middle-content">
+            <div className="image-block">
+            <img src={happyFamilyImage} alt="Happy Family" />
+           </div>
+            <div className="text-block">
+              <h3>Amazing Memories</h3>
+              <p>Your text content goes here...</p>
+            </div>
+          </div>
+        </section>
+        <section className="additional-info">
+          {/* Add your additional data here */}
+        </section>
       </main>
-      <footer>
-        <ul>
-          <li>Copyright</li>
-          <li>Privacy Policy</li>
-          <li>About Us</li>
-          <li>FAQ</li>
-          <li>Contact</li>
-        </ul>
+      <footer className="footer-container">
+        <div id="about-section" className="footer-column">
+          <h3>About Us</h3>
+          <p>Help us make a living</p>
+        </div>
+        <div id="contact-section" className="footer-column">
+          <h3>Contact</h3>
+          <p>Email: info@example.com</p>
+          <p>Phone: (123) 456-7890</p>
+        </div>
+        <div className="footer-column">
+          <h3>Follow Us</h3>
+          <p>
+            <a href="#">Facebook</a><br />
+            <a href="#">Twitter</a><br />
+            <a href="#">Instagram</a>
+          </p>
+        </div>
       </footer>
     </>
   );
