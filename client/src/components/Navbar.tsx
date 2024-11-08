@@ -18,9 +18,8 @@ const Navbar = () => {
   return (
     <nav className='display-flex justify-space-between align-center py-2 px-5 mint-green'>
       <ul>
-
-        <li>About Us</li>
-        <li>Contacts</li>
+        <li><a href="#about-section">About Us</a></li>
+        <li><a href="#contact-section">Contact</a></li>
       </ul>
       <div>
         {!loginCheck ? (
