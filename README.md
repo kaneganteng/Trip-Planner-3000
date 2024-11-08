@@ -47,30 +47,36 @@ The backend is built with Node.js and Express.js, and the front end is developed
 
 ## Folder Structure
 The project follows the Separation of Concerns design principle and has the following folder structure:
-/trip-planner-3000
+
+Trip-Planner-3000
 ├── /client                    # React frontend
-│   ├── /public
-│   └── /src
-│       ├── /components         # React components
-│       ├── /contexts           # Context API for state management
-│       ├── /pages              # React pages
-│       ├── /services           # API service calls
-│       ├── /styles             # CSS/SCSS styles
-│       └── App.js
+│   ├── /public                # Static assets 
+│   └── /src                   # Frontend source code
+│       ├── /api               # API service calls 
+│       ├── /components        # Reusable React components
+│       ├── /interfaces        # TypeScript interfaces and types
+│       ├── /pages             # React pages 
+│       ├── /utils             # Helper functions and utilities
+│       ├── App.tsx            # Main App component
+│       ├── index.css          # Global CSS styles
+│       └── main.tsx           # Entry point for React application
+│   └── index.html             # Frontend entry HTML file
 ├── /server                    # Node.js backend
-│   ├── /controllers           # Express route controllers
-│   ├── /models                # Sequelize models
-│   ├── /routes                # Express routes
-│   ├── /services              # API logic (e.g., external API calls)
-│   ├── /middlewares           # JWT auth and other middlewares
-│   ├── /utils                 # Utility functions
-│   ├── /config                # Configuration (e.g., database, environment variables)
-│   └── server.js              # Main Express app
-├── /config                    # Configuration files
-│   ├── .env                   # Environment variables
-│   ├── .gitignore
-│   └── package.json
-└── /README.md                 # This file
+│   ├── /db                    # Database schema and seed files
+│   └── /src                   # Backend source code
+│       ├── /config            # Configuration files 
+│       ├── /middleware        # Express middlewares 
+│       ├── /models            # Database models 
+│       ├── /routes            # Express routes 
+│       ├── /seeds             # Seed data scripts 
+│       ├── /types             # Type definitions for backend
+│       └── server.ts          # Main Express server file
+│   └── .env                   # Environment variables 
+├── .gitignore                 # Git ignored files
+├── LICENSE                    # License file
+├── package.json               # Project dependencies and scripts
+├── README.md                  # Project documentation
+└── tsconfig.json              # TypeScript configuration
 
 ## Installation
 
@@ -111,7 +117,6 @@ This app is deployed on Render. The deployment is automated, and both the fronte
 
 ## Link
 Visit Trip Planner 3000 Live
-
 
 ## Screenshots
 
