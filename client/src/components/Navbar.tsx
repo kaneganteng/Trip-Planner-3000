@@ -20,8 +20,8 @@ const Navbar = () => {
       <ul>
 
         <li>About Us</li>
-        <li>Contacts</li>
-      </ul>
+        <li>Contacts</li>       
+      </ul>    
       <div>
         {!loginCheck ? (
           <button className='btn' type='button'>
