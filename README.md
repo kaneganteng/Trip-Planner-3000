@@ -48,35 +48,35 @@ The backend is built with Node.js and Express.js, and the front end is developed
 ## Folder Structure
 The project follows the Separation of Concerns design principle and has the following folder structure:
 
-Trip-Planner-3000
-├── /client                    # React frontend
-│   ├── /public                # Static assets 
-│   └── /src                   # Frontend source code
-│       ├── /api               # API service calls 
-│       ├── /components        # Reusable React components
-│       ├── /interfaces        # TypeScript interfaces and types
-│       ├── /pages             # React pages 
-│       ├── /utils             # Helper functions and utilities
-│       ├── App.tsx            # Main App component
-│       ├── index.css          # Global CSS styles
-│       └── main.tsx           # Entry point for React application
-│   └── index.html             # Frontend entry HTML file
-├── /server                    # Node.js backend
-│   ├── /db                    # Database schema and seed files
-│   └── /src                   # Backend source code
-│       ├── /config            # Configuration files 
-│       ├── /middleware        # Express middlewares 
-│       ├── /models            # Database models 
-│       ├── /routes            # Express routes 
-│       ├── /seeds             # Seed data scripts 
-│       ├── /types             # Type definitions for backend
-│       └── server.ts          # Main Express server file
-│   └── .env                   # Environment variables 
-├── .gitignore                 # Git ignored files
-├── LICENSE                    # License file
-├── package.json               # Project dependencies and scripts
-├── README.md                  # Project documentation
-└── tsconfig.json              # TypeScript configuration
+Trip-Planner-3000<br>
+├── /client                    # React frontend <br>
+│   ├── /public                # Static assets <br> 
+│   └── /src                   # Frontend source code <br>
+│       ├── /api               # API service calls <br>
+│       ├── /components        # Reusable React components <br>
+│       ├── /interfaces        # TypeScript interfaces and types <br>
+│       ├── /pages             # React pages <br>
+│       ├── /utils             # Helper functions and utilities <br>
+│       ├── App.tsx            # Main App componentv <br>
+│       ├── index.css          # Global CSS styles <br>
+│       └── main.tsx           # Entry point for React application <br>
+│   └── index.html             # Frontend entry HTML file <br>
+├── /server                    # Node.js backend <br>
+│   ├── /db                    # Database schema and seed files <br>
+│   └── /src                   # Backend source code <br>
+│       ├── /config            # Configuration files <br>
+│       ├── /middleware        # Express middlewares <br>
+│       ├── /models            # Database models <br>
+│       ├── /routes            # Express routes <br>
+│       ├── /seeds             # Seed data scripts <br>
+│       ├── /types             # Type definitions for backend <br>
+│       └── server.ts          # Main Express server file <br>
+│   └── .env                   # Environment variables <br>
+├── .gitignore                 # Git ignored files <br>
+├── LICENSE                    # License file <br>
+├── package.json               # Project dependencies and scripts <br>
+├── README.md                  # Project documentation <br>
+└── tsconfig.json              # TypeScript configuration <br>
 
 ## Installation
 
