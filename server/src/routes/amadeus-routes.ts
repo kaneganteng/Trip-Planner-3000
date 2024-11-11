@@ -34,6 +34,7 @@ router.post('/getToken', async (_req: Request, res: Response) => {
 
 // Totally mess-upable
 router.get('/hotels/:cityCode', async (req: Request, res: Response) => {
+  console.log("A");
   const { cityCode } = req.params;
   console.log(cityCode);
   
@@ -46,6 +47,7 @@ router.get('/hotels/:cityCode', async (req: Request, res: Response) => {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       }
     );
+    console.log('B');
     authHeader = response.data["access_token"]; //THIS
   } catch (error) {
     console.error(error);
@@ -53,15 +55,19 @@ router.get('/hotels/:cityCode', async (req: Request, res: Response) => {
   }
 
   try {
+    console.log('C');
     const response = await axios.get(
     // note to self to bring ${cityCode} back in
-      "https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=ORL&radius=5&radiusUnit=KM&hotelSource=ALL",
+      `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}`,
       {
-        headers: { Authorization: `Bearer ${authHeader}`, 'Content-Type': 'application/x-www-form-urlencoded' }
+        headers: { Authorization: `Bearer ${authHeader}` },
+        
       }
     );
     // console.log(response.data);
-    return res.json(response.data);
+    console.log(response.data.data);
+    console.log('D');
+    return res.json(response.data.data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
         console.log('Axios error:', error.message);
