@@ -1,64 +1,41 @@
 import React from 'react';
+import { HotelAPIResult } from '../interfaces/HotelAPIResult';
+
 type ButtonProps = {
-  onResults: (data: never[] | {
-    hotel: unknown;
-    // flights: unknown;
-    // activities: unknown;
-    }) => void;
+  cityCode: string;
+  onResults: (data: HotelAPIResult) => void;
 };
-const BtnHotel: React.FC<ButtonProps> = ({ onResults }) => {
+
+const BtnHotel: React.FC<ButtonProps> = ({ cityCode, onResults }) => {
   const handleClick = async () => {
-    const data = await searchAPI();
+    const data = await searchHotelAPI();
     onResults(data);
   };
-const searchAPI = async () => {
-  try {
-    const response1 = await fetch(
-      `/amadeus/hotels/PAR/`,
-    );
-    const data1 = await response1.json();
-    if (!response1.ok) {
-      throw new Error('Invalid API response, check the network tab');
+
+  const searchHotelAPI = async (): Promise<HotelAPIResult> => {
+    try {
+      // Make the API call to the backend to fetch hotel data by cityCode
+      const response = await fetch(`/amadeus/hotels/${cityCode}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Invalid API response, check the network tab');
+      }
+
+      // Return data in the expected format
+      return { data: data };
+    } catch (err) {
+      console.error('An error occurred:', err);
+      // Return an empty array in case of error
+      return { data: [] };
     }
-    // const response2 = await fetch(
-    //   `/amadeus/shopping/flight-offers/`,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${import.meta.env.VITE_AMADEUS_CLIENT_KEY}`,
-    //     },
-    //   }
-    // );
-    // const data2 = await response2.json();
-    // if (!response2.ok) {
-    //   throw new Error('Invalid API response, check the network tab');
-    // }
-    
-    // const response4 = await fetch(
-    //   `https://test.api.amadeus.com/v1/shopping/activities`,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${import.meta.env.API_KEY}`,
-    //     },
-    //   }
-    // );
-    // const data4 = await response4.json();
-    // if (!response4.ok) {
-    //   throw new Error('Invalid API response, check the network tab');
-    // }
-    return {
-      hotel: data1,
-      // flights: data2,
-      // activities: data4,
-    };
-  } catch (err) {
-    console.error('An error occurred:', err);
-    return [];
-  }
-};
+  };
+
   return (
     <button onClick={handleClick}>
-      Hotel API
+      Search Hotels
     </button>
   );
 };
+
 export default BtnHotel;
