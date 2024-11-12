@@ -4,6 +4,7 @@ import { EventAPIResult } from '../interfaces/UserData';
 type ButtonProps = {
   location: string;
   eventDate: string;
+  description: string;
   price: number | string;
   
   onResults: (data: EventAPIResult
@@ -12,10 +13,11 @@ type ButtonProps = {
 
 const BtnEvent: React.FC<ButtonProps> = ({ 
   location = '',
+  description = '',
   eventDate = '',
   price = '',
   onResults }) => {
-    console.log('Props:', { location, eventDate, price }); 
+    console.log('Props:', { location, description, eventDate, price }); 
     
     const handleClick = async () => {
     try {
