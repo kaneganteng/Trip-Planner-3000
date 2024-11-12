@@ -9,7 +9,6 @@ import Hotels from './Hotels';
 import LocalEvents from './LocalEvents';
 import airplaneImage from '../assets/airplane.jpg';
 import happyFamilyImage from '../assets/happy family picture.jpg';
-import logoImage from '../assets/logo.png';
 
 const Home = () => {
   const [_users, setUsers] = useState<UserData[]>([]);
@@ -47,11 +46,6 @@ const Home = () => {
   const showHotels = () => setActiveSection('hotels');
   const showLocalEvents = () => setActiveSection('localevents');
 
-  // const handleSearch = () => {
-  //   console.log('Search button clicked');
-  //   // Add logic here to handle the trip search
-  // };
-
   if (error) {
     return <ErrorPage />;
   }
@@ -59,7 +53,6 @@ const Home = () => {
   return (
     <>
       <header>
-        <h1>Trips Planner 3000</h1>
         <nav>
           <ul>
             <li><button onClick={showFlights}>Flights</button></li>
@@ -99,7 +92,7 @@ const Home = () => {
           <div className="middle-content">
             <div className="text-block">
               <h3>Its time to take a flight</h3>
-              <p>Your text content goes here...</p>
+              <p>Celebrate the moment with an unexpected getaway</p>
             </div>
             <div className="image-block">
             <img src={airplaneImage} alt="Airplane" />
@@ -111,12 +104,9 @@ const Home = () => {
            </div>
             <div className="text-block">
               <h3>Amazing Memories</h3>
-              <p>Your text content goes here...</p>
+              <p>Think of nothing beyond having a great time with your family</p>
             </div>
           </div>
-        </section>
-        <section className="additional-info">
-          {/* Add your additional data here */}
         </section>
       </main>
       <footer className="footer-container">

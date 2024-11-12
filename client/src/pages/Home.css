@@ -1,4 +1,5 @@
-/* General Styles */
+
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -9,21 +10,23 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 0px;
+  padding-bottom: 0;
   background-color: #f8f9fa;
   border-bottom: 1px solid #ddd;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 1.5em;
+.logo {
+  max-width: 200px;
+  height: 90px;
 }
 
 nav ul {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 10px;
+  gap: 0px;
+  margin: 0px;
 }
 
 nav ul li {
@@ -34,15 +37,33 @@ nav ul li button {
   background: none;
   border: none;
   font: inherit;
-  color: #007bff;
+  color: #020202;
   cursor: pointer;
   padding: 10px;
-  border-radius: 5px;
+  border-right: 0.5px solid rgb(179, 179, 179);
 }
 
 nav ul li button:hover {
   background-color: #e9ecef;
 }
+
+.about {
+  width: 250px;
+}
+.btn {
+  padding: 10px 20px;
+  background-color: #080c09; /* Change this to your desired color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: red; /* Optional: Change this for hover state */
+}
+
 
 .search-section {
   display: flex;
@@ -62,8 +83,9 @@ nav ul li button:hover {
 
 .search-section button {
   padding: 10px 20px;
+  height: 45px;
   font-size: 1rem;
-  background-color: #007bff;
+  background-color: #000000;
   color: white;
   border: none;
   cursor: pointer;
@@ -71,11 +93,12 @@ nav ul li button:hover {
 }
 
 .search-section button:hover {
-  background-color: #0056b3;
+  background-color: red;
 }
 
 main {
-  padding: 20px;
+  padding: 0px;
+  padding-top: 0;
 }
 
 .info-section {
@@ -130,7 +153,8 @@ main {
   margin-bottom: 10px;
 }
 
-.footer-column p, .footer-column a {
+.footer-column p,
+.footer-column a {
   font-size: 14px;
   color: #ccc;
 }
@@ -140,14 +164,71 @@ main {
 }
 
 @media (max-width: 768px) {
+  nav ul li button { 
+    border-right: none; 
+    border-top: 1px solid #ccc;
+  
+   }
   .footer-container {
     flex-direction: column;
     text-align: center;
   }
+
   .footer-column {
     margin-bottom: 20px;
   }
+
+  .search-section {
+    flex-direction: column;
+  }
+
+  header {
+    flex-direction: column;
+   
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
 }
+
+@media (min-width: 600px) {
+  .search-section {
+    flex-direction: row;
+  }
+
+  header {
+    flex-direction: row;
+  }
+
+  header h1 {
+    font-size: 2em;
+  }
+
+  nav ul {
+    flex-direction: row;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .info-boxes {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-container {
+    padding: 40px;
+  }
+
+  .button-group {
+    justify-content: flex-start;
+  }
+}
+
 .middle-section {
   padding: 20px;
   background-color: #f8f9fa;
@@ -155,6 +236,7 @@ main {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -178,7 +260,6 @@ html {
   max-width: 100%;
   border-radius: 5px;
 }
-
 
 .home-container {
   text-align: center;
@@ -206,10 +287,6 @@ html {
   background-color: #0056b3;
 }
 
-.content {
-  margin-top: 20px;
-}
-
 .search-button {
   margin-top: 10px;
   padding: 10px 20px;
@@ -223,39 +300,4 @@ html {
 
 .search-button:hover {
   background-color: #0056b3;
-}
-
-/* Responsive Design */
-@media (min-width: 600px) {
-  .search-section {
-    flex-direction: row;
-  }
-
-  header {
-    flex-direction: row;
-  }
-
-  header h1 {
-    font-size: 2em;
-  }
-
-  nav ul {
-    gap: 20px;
-  }
-}
-
-@media (min-width: 768px) {
-  .info-boxes {
-    justify-content: space-between;
-  }
-}
-
-@media (min-width: 1024px) {
-  .home-container {
-    padding: 40px;
-  }
-
-  .button-group {
-    justify-content: flex-start;
-  }
 }
