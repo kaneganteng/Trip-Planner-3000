@@ -222,7 +222,7 @@ router.get('/shopping/activities', async (req: Request, res: Response) => {
     if (typeof city !== "string") {
       city = " "
     }
-    const {lon, lat} = await lookUpLocation('city');
+    const {lon, lat} = await lookUpLocation(city);
     if (!lon || !lat || !radius) {
       return res.status(400).json({ message: 'Missing required query parameters: lon, lat, and radius' });
     }

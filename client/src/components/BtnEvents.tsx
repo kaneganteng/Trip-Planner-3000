@@ -4,7 +4,6 @@ import { EventAPIResult } from '../interfaces/UserData';
 type ButtonProps = {
   location: string;
   eventDate: string;
-  description: string;
   price: number | string;
   
   onResults: (data: EventAPIResult
@@ -13,23 +12,23 @@ type ButtonProps = {
 
 const BtnEvent: React.FC<ButtonProps> = ({ 
   location = '',
-  description = '',
   eventDate = '',
   price = '',
   onResults }) => {
-    console.log('Props:', { location, description, eventDate, price }); 
+    console.log('Props:', { location, eventDate, price }); 
     
     const handleClick = async () => {
     try {
-      const data = await searchAPI();
+      const data = await searchAPI(location);
       onResults(data);
     } catch (error) {
       console.error('Failed to fetch events:', error);
       alert('An error occurred while searching for local events. Please try again later.');
     }
   };
-const searchAPI = async () => {
+const searchAPI = async (location:string) => {
   try {
+    console.log(location);
     const query: string = new URLSearchParams({
       city: location || '',
       radius: '10', // Default radius, you can make it dynamic if needed
@@ -39,7 +38,7 @@ const searchAPI = async () => {
     console.log('Query string:', query);
 
     const response = await fetch(
-      `/amadeus/shopping/activities?query${query}`,
+      `/amadeus/shopping/activities?${query}`,
     );
 
     const data = await response.json();
