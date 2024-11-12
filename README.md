@@ -1,6 +1,6 @@
 ## Trip Planner 3000
 
-Trip Planner 3000 is a modern web application designed to help users plan their trips seamlessly. It allows users to book flights, reserve hotels, and explore local events to create an unforgettable travel experience. The app provides a full-fledged user interface with an interactive and responsive design, backed by a RESTful API for efficient data management.
+Trip Planner 3000 is a modern web application designed to help users plan their trips seamlessly. It allows users to search flights, hotels, and explore local events to create an unforgettable travel experience. The app provides a full-fledged user interface with an interactive and responsive design, backed by a RESTful API for efficient data management.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ Trip Planner 3000 is a modern web application designed to help users plan their 
 ## Project Description
 
 Trip Planner 3000 is a web-based application where users can:
-- Plan and book trips: Search and book flights, reserve hotels, and explore local events.
+- Plan and book trips: Search flights, hotels, and explore local events.
 - Interactive User Interface: Users can interact with the system to input their travel preferences and get personalized results.
 - Fully Integrated: The application integrates multiple external APIs to gather flight, hotel, and event information for the users.
 The backend is built with Node.js and Express.js, and the front end is developed using React. The app follows modern best practices with JWT authentication, secure handling of sensitive information, and a separation of concerns architecture.
@@ -37,8 +37,8 @@ The backend is built with Node.js and Express.js, and the front end is developed
 
 ## Features
 
-- Search & Book Flights: Users can search for available flights based on dates and destinations.
-- Hotel Reservations: Reserve hotels according to location, price, and rating.
+- Search Flights: Users can search for available flights based on dates and destinations.
+- SearchvHotel: See hotels according to location, price, and rating.
 - Local Events: Discover local events during the trip to enrich the travel experience.
 - User Authentication: Secure login and registration with JWT authentication.
 - Responsive Design: Fully responsive design that works well on mobile and desktop devices.
