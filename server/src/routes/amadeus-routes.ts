@@ -190,12 +190,15 @@ console.log(process.env.API_BASE_URL)
 // ROUTER FOR LOCAL EVENT
 // ROUTER FOR LOCAL EVENT
 async function lookUpLocation(city: string): Promise<{ lon: number, lat: number}> {
-   const response: { data: {lat: number, lon: number}[] } = await axios.get(
+  console.log( `${process.env.API_BASE_URL}/geo/1.0/direct?q=${city}&limit=1&appid=${process.env.API_KEY}`);
+   const response: { data: {lon: number, lat: number}[] } = 
+   await axios.get(
     `${process.env.API_BASE_URL}/geo/1.0/direct?q=${city}&limit=1&appid=${process.env.API_KEY}`
   )
   console.log(response.data[0]);
   return response.data[0] as { lon: number, lat: number };
 };
+
 router.get('/shopping/activities', async (req: Request, res: Response) => {
   
   let authHeader: string = '';
@@ -214,11 +217,12 @@ router.get('/shopping/activities', async (req: Request, res: Response) => {
   }
   
     // Extract query parameters for activity search
-    let { city, radius, max } = req.query;
+    let { city, radius, max, price } = req.query;
+    console.log(city, radius, max, price);
     if (typeof city !== "string") {
       city = " "
     }
-    const {lon, lat} = await lookUpLocation(city);
+    const {lon, lat} = await lookUpLocation('city');
     if (!lon || !lat || !radius) {
       return res.status(400).json({ message: 'Missing required query parameters: lon, lat, and radius' });
     }

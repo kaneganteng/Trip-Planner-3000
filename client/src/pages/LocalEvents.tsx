@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { EventAPIResult, EventToDisplay } from '../interfaces/UserData';
-import BtnEvent from '../components/BthEvents';
+import BtnEvent from '../components/BtnEvents';
 import './Home.css';
 
 const Events = () => {
@@ -50,7 +50,7 @@ const Events = () => {
         <BtnEvent 
             location={location}
             eventDate={eventDate}
-            price={Number(price) || 0} 
+            price={Number(price)} 
             onResults={handleEventResults} // Corrected spelling
 />
             {eventsToDisplay && (

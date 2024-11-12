@@ -1,9 +1,7 @@
 ## Trip Planner 3000
-
 Trip Planner 3000 is a modern web application designed to help users plan their trips seamlessly. It allows users to search flights, hotels, and explore local events to create an unforgettable travel experience. The app provides a full-fledged user interface with an interactive and responsive design, backed by a RESTful API for efficient data management.
 
 ## Table of Contents
-
 - Project Description 
 - Technologies Used
 - Features
@@ -18,7 +16,6 @@ Trip Planner 3000 is a modern web application designed to help users plan their 
 - License
 
 ## Project Description
-
 Trip Planner 3000 is a web-based application where users can:
 - Plan and book trips: Search flights, hotels, and explore local events.
 - Interactive User Interface: Users can interact with the system to input their travel preferences and get personalized results.
@@ -26,7 +23,6 @@ Trip Planner 3000 is a web-based application where users can:
 The backend is built with Node.js and Express.js, and the front end is developed using React. The app follows modern best practices with JWT authentication, secure handling of sensitive information, and a separation of concerns architecture.
 
 ## Technologies Used
-
 - Frontend: React
 - Backend: Node.js, Express.js
 - Database: PostgreSQL, Sequelize 
@@ -36,7 +32,6 @@ The backend is built with Node.js and Express.js, and the front end is developed
 - APIs: Multiple APIs for flight, hotel, and local event information
 
 ## Features
-
 - Search Flights: Users can search for available flights based on dates and destinations.
 - SearchvHotel: See hotels according to location, price, and rating.
 - Local Events: Discover local events during the trip to enrich the travel experience.
@@ -79,24 +74,23 @@ Trip-Planner-3000<br>
 └── tsconfig.json              # TypeScript configuration <br>
 
 ## Installation
-
 1. Clone the repository:
-cd trip-planner-3000
-git clone https://github.com/yourusername/trip-planner-3000.git
+    cd trip-planner-3000
+    git clone https://github.com/kanegateng/trip-planner-3000.git
 2. Install backend dependencies:
-cd server
-npm install
+    cd server
+    npm install
 3. Install frontend dependencies:
-cd client
-npm install
+    cd client
+    npm install
 4. Set up .env folder:
 5. Run the application:
-5.1. Start the backend server:
-cd server
-npm start
-5.2. Start the frontend server:
-cd client
-npm start
+    5.1. Start the backend server:
+        cd server
+        npm start
+    5.2. Start the frontend server:
+        cd client
+        npm start
 Now, the app will be running locally at http://localhost:3000.
 
 ## Authentication
