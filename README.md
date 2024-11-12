@@ -127,4 +127,7 @@ We welcome contributions to Trip Planner 3000! Please follow these steps to get 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-
+## Credits
+* Kane Esasta: https://github.com/kaneganteng
+* Liciaav: https://github.com/Liciaav
+* Michele Ferrario: https://github.com/Micheleflare
