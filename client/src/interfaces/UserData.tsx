@@ -17,6 +17,7 @@ export interface FlightAPIResult {
     }[];
 }
 export interface FlightToDisplay {
+    id?: string;
     from: string;
     destination: string;
     departureDate: string;
@@ -40,6 +41,7 @@ export interface EventAPIResult {
     }[];
 }
 export interface EventToDisplay{
+    id?: string;
     name: string;
     description: string;
     location: string;
