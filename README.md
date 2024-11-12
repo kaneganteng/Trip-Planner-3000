@@ -110,9 +110,10 @@ All these APIs are abstracted in the backend and used in combination to give use
 This app is deployed on Render. The deployment is automated, and both the frontend and backend are hosted on Render with the database connected securely.
 
 ## Link
-Visit Trip Planner 3000 Live
+Visit Trip Planner 3000 Live https://trip-planner-3000.onrender.com
 
 ## Screenshots
+![Screenshot of the Trip Planner 3000](./client/src/assets/Trip-Planner-Screenshot.png)
 
 ## Contributing
 We welcome contributions to Trip Planner 3000! Please follow these steps to get started:
