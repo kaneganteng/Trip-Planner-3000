@@ -1,5 +1,5 @@
-import { FlightAPIResult, FlightToDisplay } from '../interfaces/LiciaInterfaceUserData';
-import React, { useState } from 'react';
+import { FlightAPIResult, FlightToDisplay } from '../interfaces/UserData';
+import { useState } from 'react';
 import BtnFlight from '../components/BtnFlight';
 import './Home.css';
 
@@ -32,7 +32,6 @@ const Flights = () => {
         console.log(flights);
         setFlightsToDisplay(flights);
     };
-
 
     return (
         <section className="search-section">

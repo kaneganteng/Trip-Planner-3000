@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlightAPIResult } from '../interfaces/LiciaInterfaceUserData';
+import { FlightAPIResult } from '../interfaces/UserData';
+
 type ButtonProps = {
   flyingFrom: string;
   to: string;
@@ -7,10 +8,10 @@ type ButtonProps = {
   returning: string;
   adults: number
 
-
   onResults: (data: FlightAPIResult
   ) => void;
 };
+
 const BtnFlight: React.FC<ButtonProps> = ({ 
   flyingFrom, 
   to, 
@@ -23,9 +24,7 @@ const BtnFlight: React.FC<ButtonProps> = ({
     onResults(data);
   };
   const searchAPI = async () => {
-    alert('trying')
     try {
-      alert('trying2')
       const response2 = await fetch(
         `/amadeus/shopping/flight-offers?originLocationCode=${flyingFrom}&destinationLocationCode=${to}&departureDate=${departing}&adults=${adults}&returnDate=${returning}`
        
@@ -35,11 +34,8 @@ const BtnFlight: React.FC<ButtonProps> = ({
         throw new Error('Invalid API response, check the network tab');
       }
 
-
       return {
-
         flights: data2,
-
       };
     } catch (err) {
       console.error('An error occurred:', err);

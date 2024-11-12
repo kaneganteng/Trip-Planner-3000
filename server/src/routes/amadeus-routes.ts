@@ -236,7 +236,6 @@ router.get('/shopping/activities', async (req: Request, res: Response) => {
           }
         }
       );
-  
       return res.json(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
